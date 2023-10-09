@@ -1,0 +1,14 @@
+/target/*
+.idea/*
+*/target/*
+/*/*.iml
+/*/dependency-reduced-pom.xml
+/logs/*
+*/logs/*
+pom.xml.releaseBackup
+*/pom.xml.releaseBackup
+.run/*
+
+.settings/
+application-config.yml
+application-local.yml
