@@ -6,7 +6,7 @@
 
   <groupId>com.know-data.framework</groupId>
   <artifactId>know-data-study-spark</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
 
   <name>know-data-study-spark</name>
   <!-- FIXME change it to the project's website -->
