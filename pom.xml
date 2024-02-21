@@ -4,14 +4,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.know-data</groupId>
+    <groupId>com.know-data.framework</groupId>
     <artifactId>know-data-parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
 
     <modules>
         <module>know-data-core</module>
-        <module>know-data-study-set</module>
+        <module>know-data-study</module>
+        <module>know-data-event</module>
+        <module>know-data-test</module>
+        <module>know-data-data-dict</module>
+        <module>know-data-site-server</module>
+        <module>know-data-id-generator</module>
+        <module>know-data-bms</module>
+        <module>know-data-executor</module>
+        <module>know-data-bdp-servers</module>
     </modules>
 
     <name>know-data-parent</name>
@@ -19,6 +27,8 @@
     <url>https://know-data.com</url>
 
     <properties>
+        <!-- ########## variables & configuration ########### -->
+
         <!-- | project | -->
         <!-- <applicationStartupClass>com.knowdata.xx.yy.zz.XXApplication</applicationStartupClass> -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,8 +38,8 @@
         <java.version>1.8</java.version>
 
         <!--@reference-doc
-        sonar代码扫描排除不必要文件-CSDN-https://blog.csdn.net/weixin_45342958/article/details/94738366
-        将Sonar配置为从Mavenpom.xml中排除文件-h5w3-https://www.h5w3.com/qa/427775.html
+            [1] sonar代码扫描排除不必要文件 - CSDN - https://blog.csdn.net/weixin_45342958/article/details/94738366
+            [2] 将Sonar配置为从Maven pom.xml中排除文件 - h5w3 - https://www.h5w3.com/qa/427775.html
         -->
         <!--<sonar.inclusions>
             src/main/java/cn/knowdata/xx/biz/**,
@@ -53,6 +63,8 @@
         <!--maven.javadoc.skip=true=>避免:MavenReportException:ErrorwhilegeneratingJavadoc|https://blog.csdn.net/qq_40595922/article/details/120872697-->
         <maven.javadoc.skip>true</maven.javadoc.skip>
 
+        <!-- ########## plugin ########### -->
+
         <!-- | maven plugins | -->
         <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
         <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
@@ -67,44 +79,133 @@
         <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
         <appassembler-maven-plugin.version>2.1.0</appassembler-maven-plugin.version>
 
-        <!-- | other | -->
-        <!-- 2.1.15 / 4.0.0 -->
+        <!-- | test & code quality | -->
+        <!-- sonar : code quality scan -->
+        <sonar-maven-plugin.version>3.6.0.1398</sonar-maven-plugin.version>
+        <!-- jacoco : code quality -->
+        <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+
+        <!-- | other plugins | -->
+        <!-- 2.1.15 / 4.0.0 : git-commit -->
         <git-commit-id-plugin.version>4.0.0</git-commit-id-plugin.version>
 
-        <junit.version>4.13.1</junit.version>
+        <!-- ########## dependency ########### -->
+
+        <!-- ********** language-level basic dependency ********** -->
+        <!-- | other language | -->
+        <!-- markdown : other language -->
+        <commonmark-java.version>0.9.0</commonmark-java.version>
+
+        <!-- jinjava : other language -->
+        <jinjava.version>2.5.6</jinjava.version>
+
+        <!-- groovy : other language -->
+        <grovvy.version>3.0.7</grovvy.version>
+
+        <!-- | programing helper | -->
+        <!-- lombok : programing helper
+            @version 1.18.22 / RELEASE / ...
+        -->
+        <lombok.version>1.18.22</lombok.version>
+
+        <validation-api.version>2.0.1.FINAL</validation-api.version>
+
+        <!-- | language-level' toolkit | -->
+        <commons-lang3.version>3.9</commons-lang3.version>
+        <commons-beanutils.version>1.9.3</commons-beanutils.version>
+        <commons-codec.version>1.15</commons-codec.version>
+
+        <hutool.version>5.8.4</hutool.version>
+
+        <!-- | mock framework | -->
         <jmockdata.version>4.3.0</jmockdata.version>
         <mockito.version>3.4.0</mockito.version>
+
+        <!-- | test & code quality | -->
+        <!-- junit : unit test -->
+        <junit.version>4.13.1</junit.version>
+
+        <!-- | log | -->
+        <!-- slf4j / log facade framework : log -->
         <slf4j.version>1.7.25</slf4j.version>
-        <!--1.x:log4j(log4j.properties)|2.x:log4j2(支持log4j2.properties中动态读取env/环境变量等特性)-->
+        <!-- log4j2 / log implements framework : log -->
+        <!-- 1.x:log4j(log4j.properties)|2.x:log4j2(支持log4j2.properties中动态读取env/环境变量等特性) -->
         <log4j.version>2.13.3</log4j.version>
         <spring-boot-starter-log4j.version>1.3.8.RELEASE</spring-boot-starter-log4j.version>
 
-        <!-- swagger -->
-        <knife4j-annotations.version>3.0.3</knife4j-annotations.version>
-
-        <skywalking.apm-application-toolkit.version>8.7.0</skywalking.apm-application-toolkit.version>
-
-        <jackson.version>2.13.0</jackson.version>
-        <hutool.version>5.8.4</hutool.version>
-        <commons-beanutils.version>1.9.3</commons-beanutils.version>
-
+        <!-- | os | -->
         <oshi.version>6.1.5</oshi.version>
         <jna.version>5.10.0</jna.version>
         <sigar.version>1.6.4</sigar.version>
 
-        <!--spring-cloud,spring-cloud-alibaba,spring-boot三者的兼容关系:
-        https://github.com/alibaba/spring-cloud-alibaba/wiki/版本说明-->
+        <!-- ********** data & database & orm ********** -->
+
+        <!-- | cache | -->
+        <guava.version>28.0-jre</guava.version>
+        <redis.jdbc.version>3.1.0</redis.jdbc.version>
+
+        <!-- | relationship database | -->
+        <mysql.jdbc.version>8.0.28</mysql.jdbc.version>
+        <influxdb.jdbc.version>2.22</influxdb.jdbc.version>
+        <!-- 0.3.2 / 0.4.6 / 0.5.0 -->
+        <clickhouse.jdbc.version>0.3.2</clickhouse.jdbc.version>
+
+        <!-- | graph database | -->
+        <neo4j.jdbc.version>4.2.0</neo4j.jdbc.version>
+
+        <!-- | data channel | -->
+        <kafka.clients.version>2.4.1</kafka.clients.version>
+
+        <!-- | search engine database | -->
+        <!-- elasticsearch - opendistro-sql plugin : search engine database -->
+        <opendistro-sql-jdbc.version>1.12.0.0</opendistro-sql-jdbc.version>
+
+        <!-- | file data | -->
+        <!-- excel/csv : file data -->
+        <easyexcel.version>3.1.5</easyexcel.version>
+        <!-- thumbnailator / image file handle : file data -->
+        <net.coobird.thumbnailator.version>0.4.8</net.coobird.thumbnailator.version>
+
+        <!-- | data serializable & json | -->
+        <!-- json : data serialization -->
+        <fastjson2.version>2.0.42</fastjson2.version>
+
+        <jackson.version>2.13.4</jackson.version>
+        <jackson-dataformat-xml.version>2.13.4</jackson-dataformat-xml.version>
+
+        <!-- 2.8.5 -->
+        <gson.version>2.8.5</gson.version>
+
+        <!-- | database connection management | -->
+        <dbpool-druid.version>1.2.8</dbpool-druid.version>
+
+        <!-- | orm | -->
+        <!-- mybatis : orm -->
+        <mybatis.version>3.5.10</mybatis.version>
+        <!-- mybatis-plus:3.5.2 inner mybatis version = 3.5.10 -->
+        <mybatis-plus.version>3.5.2</mybatis-plus.version>
+
+        <!-- ********** system-level basic framework -->
+        <!-- | spring | -->
         <spring.version>5.2.15.RELEASE</spring.version>
         <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
         <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
         <spring-cloud-context.version>2.2.9.RELEASE</spring-cloud-context.version>
         <spring-cloud-openfeign.version>2.2.9.RELEASE</spring-cloud-openfeign.version>
         <spring-cloud-alibaba.version>2.2.7.RELEASE</spring-cloud-alibaba.version>
-        <nacos-config-spring-boot-starter.version>0.2.10</nacos-config-spring-boot-starter.version>
-        <nacos-discovery-spring-boot-starter.version>0.2.10</nacos-discovery-spring-boot-starter.version>
 
-        <mybatis-plus.version>3.2.0</mybatis-plus.version>
+        <!-- | data validation framework | start -->
+        <jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
+        <hibernate-validator.version>6.1.7.Final</hibernate-validator.version>
+        <glassfish.jakarta.el.version>3.0.3</glassfish.jakarta.el.version>
+        <!-- | data validation framework | end -->
 
+        <!-- | web | -->
+        <!-- servlet : web -->
+        <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
+
+        <!-- | api document management | -->
+        <!-- swagger : api document management -->
         <!-- [v1] 1.5.22 [v2] 2.0.0-rc2 / [v3] 2.1.2 -->
         <swagger.version>1.5.22</swagger.version>
         <swagger.v2.version>2.0.0-rc2</swagger.v2.version>
@@ -112,68 +213,119 @@
         <springforx-swagger.version>3.0.0</springforx-swagger.version>
         <swagger-bootstrap-ui.version>1.9.6</swagger-bootstrap-ui.version>
         <!--        <swagger.version>2.0.0-rc2</swagger.version>-->
-<!--        <springforx-swagger.version>2.9.2</springforx-swagger.version>-->
-<!--        <swagger-bootstrap-ui.version>1.9.6</swagger-bootstrap-ui.version>-->
+        <!--        <springforx-swagger.version>2.9.2</springforx-swagger.version>-->
+        <!--        <swagger-bootstrap-ui.version>1.9.6</swagger-bootstrap-ui.version>-->
 
-        <openfeign.version>10.4.0</openfeign.version>
+        <!-- knife4j / Swagger-UI API Document : api document management -->
+        <knife4j-annotations.version>3.0.3</knife4j-annotations.version>
 
-        <!-- | database & orm | -->
-        <dbpool-druid.version>1.2.8</dbpool-druid.version>
-        <guava.version>28.0-jre</guava.version>
-        <mysql.jdbc.version>8.0.28</mysql.jdbc.version>
-        <redis.jdbc.version>3.1.0</redis.jdbc.version>
-        <influxdb.jdbc.version>2.22</influxdb.jdbc.version>
-        <kafka.clients.version>2.4.1</kafka.clients.version>
-        <clickhouse.jdbc.version>0.3.2</clickhouse.jdbc.version>
-        <neo4j.jdbc.version>4.2.0</neo4j.jdbc.version>
-        <easyexcel.version>3.1.5</easyexcel.version>
-        <!-- markdown -->
-        <commonmark-java.version>0.9.0</commonmark-java.version>
-        <!-- elasticsearch - opendistro-sql plugin -->
-        <opendistro-sql-jdbc.version>1.12.0.0</opendistro-sql-jdbc.version>
-
-        <!-- | data serializable & json | -->
-        <!-- 2.8.5 -->
-        <gson.version>2.8.5</gson.version>
-        <jackson-dataformat-xml.version>2.13.4</jackson-dataformat-xml.version>
-
-        <!-- | data communication security | -->
-        <!-- jwt component : jjwt -->
-        <!-- {
-                @reference-doc
-                    @link https://gitee.com/love-connect-team/love-connect-im-service/blob/dev/pom.xml
-                    @link https://gitee.com/love-connect-team/love-connect-im-service/blob/dev/im-service-common/src/main/java/cn/loveconnect/common/utils/TokenUtils.java
-                    @link https://blog.csdn.net/AdminGuan/article/details/100147488
-            }
-        -->
+        <!-- | system communication & system security | -->
+        <!-- jwt component -->
         <jwt.version>0.11.2</jwt.version>
         <jjwt-gson.version>0.11.5</jjwt-gson.version>
 
-        <!-- | third-party-service | -->
+        <!-- ********** spring boot/cloud framework related components ********** -->
+
+        <!-- nacos : configuration center & register center -->
+        <nacos-config-spring-boot-starter.version>0.2.10</nacos-config-spring-boot-starter.version>
+        <nacos-discovery-spring-boot-starter.version>0.2.10</nacos-discovery-spring-boot-starter.version>
+
+        <!-- feign : service call -->
+        <openfeign.version>10.4.0</openfeign.version>
+
+        <!-- skywalking : trace request -->
+        <skywalking.apm-application-toolkit.version>8.7.0</skywalking.apm-application-toolkit.version>
+
+        <!-- ********** third-party-service ********** -->
         <alibabacloud-dysmsapi.version>2.0.23</alibabacloud-dysmsapi.version>
         <oss.qiniu-java-sdk.version>[7.7.0, 7.10.99]</oss.qiniu-java-sdk.version>
 
-
-        <net.coobird.thumbnailator.version>0.4.8</net.coobird.thumbnailator.version>
-
-        <!-- | test & code quality | -->
-        <sonar-maven-plugin.version>3.6.0.1398</sonar-maven-plugin.version>
-        <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+        <!-- ********** other dependency ********** -->
 
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <!--#[1]基础工具依赖#-->
-
-            <!--unittestdependency-->
+            <!-- ********** language-level basic dependency ********** -->
+            <!-- | other language | -->
+            <!-- markdown : other language
+                @functionMarkdownJava解析器
+                @reference-doc
+                    [1]commonmark-java-codingdict - https://www.codingdict.com/os/software/51515 -->
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
-                <scope>test</scope>
+                <groupId>com.atlassian.commonmark</groupId>
+                <artifactId>commonmark</artifactId>
+                <version>${commonmark-java.version}</version>
             </dependency>
 
+            <!-- jinjava : other language -->
+            <dependency>
+                <groupId>com.hubspot.jinjava</groupId>
+                <artifactId>jinjava</artifactId>
+                <!-- 2.5.6 -->
+                <version>${jinjava.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>guava</artifactId>
+                        <groupId>com.google.guava</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- groovy : other language -->
+            <dependency>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-all</artifactId>
+                <type>pom</type>
+                <version>${grovvy.version}</version>
+            </dependency>
+
+            <!-- | programing helper | -->
+            <!-- lombok : programing helper -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>compile</scope>
+                <optional>true</optional>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${validation-api.version}</version>
+            </dependency>
+
+            <!-- | language-level' toolkit | -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <!-- https://search.maven.org/artifact/commons-beanutils/commons-beanutils/1.9.3/jar -->
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons-beanutils.version}</version>
+            </dependency>
+
+            <!-- https://search.maven.org/artifact/commons-codec/commons-codec/1.15/jar -->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.version}</version>
+            </dependency>
+
+            <!-- hutool-common util dependency -->
+            <!-- url:https://www.hutool.cn//https://www.hutool.cn/docs/ -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <!-- | mock framework | -->
             <dependency>
                 <groupId>com.github.jsonzou</groupId>
                 <artifactId>jmockdata</artifactId>
@@ -196,7 +348,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <!--3.4.0-->
+                <!-- 3.4.0 -->
                 <version>${mockito.version}</version>
                 <scope>test</scope>
             </dependency>
@@ -218,44 +370,29 @@
                 </exclusions>
             </dependency>
 
-            <!--
-              Swagger-UI API Document
-              @reference-doc https://blog.csdn.net/adminwxc/article/details/127744816
-            -->
+            <!-- | test & code quality | -->
+            <!-- junit : unit test -->
             <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-spring-boot-starter</artifactId>
-                <version>${knife4j-annotations.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-annotations</artifactId>
-                <version>${knife4j-annotations.version}</version>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
             </dependency>
 
-            <!--logdependency-->
-            <!--https://central.sonatype.dev/artifact/org.springframework.boot/spring-boot-starter-log4j/1.3.8.RELEASE/overview-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-log4j</artifactId>
-                <version>${spring-boot-starter-log4j.version}</version>
-            </dependency>
-            <!--https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-log4j2[√]-->
-            <!--https://central.sonatype.dev/artifact/org.springframework.boot/spring-boot-starter-log4j2/1.3.8.RELEASE/overview[X]-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-log4j2</artifactId>
-                <version>${spring-boot.version}</version>
-            </dependency>
-            <!--<dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            </dependency>-->
+            <!-- | log | -->
+            <!-- slf4j / log facade framework : log -->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
+
+            <!-- log4j2 / log implements framework : log -->
+            <!--<dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            </dependency>-->
+
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-api</artifactId>
@@ -271,9 +408,150 @@
                 <artifactId>log4j-slf4j-impl</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
+            <!-- JUL ：= java.util.logging ：= JDK 自带的日志框架
+                @reference-doc
+                    [1] JUL和Log4j - jianshu - https://www.jianshu.com/p/faa4bd13ab39
+            -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-jul</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
 
-            <!--jsonutildependency-->
-            <!--url:https://search.maven.org/artifact/com.fasterxml.jackson.core/jackson-core/2.13.0/bundle-->
+            <!--https://central.sonatype.dev/artifact/org.springframework.boot/spring-boot-starter-log4j/1.3.8.RELEASE/overview-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-log4j</artifactId>
+                <version>${spring-boot-starter-log4j.version}</version>
+            </dependency>
+            <!--https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-log4j2[√]-->
+            <!--https://central.sonatype.dev/artifact/org.springframework.boot/spring-boot-starter-log4j2/1.3.8.RELEASE/overview[X]-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-log4j2</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <!-- | os | -->
+            <!-- oshi[start] -->
+            <!-- Java免费的基于JNA的操作系统和硬件信息库 -->
+            <!-- https://mvnrepository.com/artifact/com.github.oshi/oshi-core -->
+            <!--            <dependency>-->
+            <!--                <groupId>com.github.oshi</groupId>-->
+            <!--                <artifactId>oshi-core</artifactId>-->
+            <!--                <version>${oshi.version}</version>-->
+            <!--            </dependency>-->
+            <!-- JNA（JavaNativeAccess）提供一组Java工具类用于在运行期间动态访问系统本地库（nativelibrary：如Window的dll）而不需要编写任何Native/JNI代码。
+            开发人员只要在一个java接口中描述目标nativelibrary的函数与结构，JNA将自动实现Java接口到nativefunction的映射。 -->
+            <!--            <dependency>-->
+            <!--                <groupId>net.java.dev.jna</groupId>-->
+            <!--                <artifactId>jna</artifactId>-->
+            <!--                <version>${jna.version}</version>-->
+            <!--            </dependency>-->
+            <!-- 为了解决JNA冲突问题而引入 -->
+            <!--            <dependency>-->
+            <!--                <groupId>net.java.dev.jna</groupId>-->
+            <!--                <artifactId>jna-platform</artifactId>-->
+            <!--                <version>${jna.version}</version>-->
+            <!--            </dependency>-->
+            <!--oshi[end]-->
+
+            <!-- sigar[start] -->
+            <dependency>
+                <groupId>org.fusesource</groupId>
+                <artifactId>sigar</artifactId>
+                <version>${sigar.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- sigar[end] -->
+
+            <!-- ********** data & database & orm ********** -->
+
+            <!-- | cache | -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <!-- redis -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${redis.jdbc.version}</version>
+            </dependency>
+
+            <!-- | relationship database | -->
+            <!-- mysql -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.jdbc.version}</version>
+            </dependency>
+
+            <!-- clickhouse
+                [1] https://github.com/ClickHouse/clickhouse-jdbc
+                [2] https://search.maven.org/artifact/ru.yandex.clickhouse/clickhouse-jdbc -->
+            <!--<dependency>
+            <groupId>ru.yandex.clickhouse</groupId>
+            <artifactId>clickhouse-jdbc</artifactId>
+            <version>${clickhouse.jdbc.version}</version>
+            </dependency>-->
+            <dependency>
+                <groupId>com.clickhouse</groupId>
+                <artifactId>clickhouse-jdbc</artifactId>
+                <version>${clickhouse.jdbc.version}</version>
+            </dependency>
+            <!-- https://github.com/ClickHouse/clickhouse-jdbc/tree/v0.3.2/clickhouse-client -->
+            <dependency>
+                <groupId>com.clickhouse</groupId>
+                <artifactId>clickhouse-http-client</artifactId>
+                <version>${clickhouse.jdbc.version}</version>
+            </dependency>
+
+            <!-- influxdb -->
+            <dependency>
+                <groupId>org.influxdb</groupId>
+                <artifactId>influxdb-java</artifactId>
+                <version>${influxdb.jdbc.version}</version>
+            </dependency>
+
+            <!-- | graph database | -->
+            <dependency>
+                <groupId>org.neo4j.driver</groupId>
+                <artifactId>neo4j-java-driver</artifactId>
+                <version>${neo4j.jdbc.version}</version>
+            </dependency>
+
+            <!-- | data channel | -->
+
+            <!-- | search engine database | -->
+            <!-- elasticsearch - opendistro-sql plugin : search engine database -->
+            <!-- es sql plugin dependency -->
+            <dependency>
+                <groupId>com.amazon.opendistroforelasticsearch.client</groupId>
+                <artifactId>opendistro-sql-jdbc</artifactId>
+                <version>${opendistro-sql-jdbc.version}</version>
+            </dependency>
+
+            <!-- | file data | -->
+            <!-- easyexcel
+                [1] easyexcel - https://easyexcel.opensource.alibaba.com/ -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${easyexcel.version}</version>
+            </dependency>
+
+            <!-- | data serializable & json | -->
+            <!-- jackson
+                @url:https://search.maven.org/artifact/com.fasterxml.jackson.core/jackson-core/2.13.0/bundle
+            -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
@@ -290,100 +568,104 @@
                 <version>${jackson.version}</version>
             </dependency>
 
-            <!--hutool-commonutildependency-->
-            <!--url:https://www.hutool.cn//https://www.hutool.cn/docs/-->
+            <!-- fastjson2 -->
+            <!-- https://github.com/alibaba/fastjson2/releases -->
+            <!--  -->
             <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
             </dependency>
 
-            <!--https://search.maven.org/artifact/commons-beanutils/commons-beanutils/1.9.3/jar-->
+            <!-- gson -->
             <dependency>
-                <groupId>commons-beanutils</groupId>
-                <artifactId>commons-beanutils</artifactId>
-                <version>${commons-beanutils.version}</version>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson.version}</version>
             </dependency>
 
-
-            <!--oshi[start]-->
-            <!--Java免费的基于JNA的操作系统和硬件信息库-->
-            <!--https://mvnrepository.com/artifact/com.github.oshi/oshi-core-->
-<!--            <dependency>-->
-<!--                <groupId>com.github.oshi</groupId>-->
-<!--                <artifactId>oshi-core</artifactId>-->
-<!--                <version>${oshi.version}</version>-->
-<!--            </dependency>-->
-            <!--JNA（JavaNativeAccess）提供一组Java工具类用于在运行期间动态访问系统本地库（nativelibrary：如Window的dll）而不需要编写任何Native/JNI代码。
-            开发人员只要在一个java接口中描述目标nativelibrary的函数与结构，JNA将自动实现Java接口到nativefunction的映射。-->
-<!--            <dependency>-->
-<!--                <groupId>net.java.dev.jna</groupId>-->
-<!--                <artifactId>jna</artifactId>-->
-<!--                <version>${jna.version}</version>-->
-<!--            </dependency>-->
-            <!--为了解决JNA冲突问题而引入-->
-<!--            <dependency>-->
-<!--                <groupId>net.java.dev.jna</groupId>-->
-<!--                <artifactId>jna-platform</artifactId>-->
-<!--                <version>${jna.version}</version>-->
-<!--            </dependency>-->
-            <!--oshi[end]-->
-
-            <!--sigar[start]-->
+            <!-- | database connection management | -->
+            <!-- druid | https://mvnrepository.com/artifact/com.alibaba/druid -->
             <dependency>
-                <groupId>org.fusesource</groupId>
-                <artifactId>sigar</artifactId>
-                <version>${sigar.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>log4j</groupId>
-                        <artifactId>log4j</artifactId>
-                    </exclusion>
-                </exclusions>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${dbpool-druid.version}</version>
             </dependency>
-            <!--sigar[end]-->
 
-            <!--#[2.0]本父工程的若干子工程-->
+            <!-- | orm | -->
+            <!-- mybatis : orm -->
+
+            <!-- mybatis-plus : orm -->
             <!--
-            <dependency>
-                <groupId>com.knowdata</groupId>
-                <artifactId>knowdata-service-domain</artifactId>
-                <version>${project.parent.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>lombok</artifactId>
-                        <groupId>org.projectlombok</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>com.knowdata</groupId>
-                <artifactId>knowdata-service-common</artifactId>
-                <version>${project.parent.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>lombok</artifactId>
-                        <groupId>org.projectlombok</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
+                @note mybatisplus base on `spring-boot-starter`(spring-boot-starter-parent) : 2.5+
+                @link https://baomidou.com/
             -->
-
-            <!--#[2.1]基础框架依赖-spring-->
             <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-test</artifactId>
-                <version>${spring.version}</version>
+                <groupId>com.baomidou</groupId>
+                <!-- mybatis-plus-boot-starter = {
+                    spring-boot-dependencies , spring-cloud-commons, spring-boot-autoconfigure , spring-boot-starter-jdbc , spring-boot-configuration-processor, ...
+                    , mybatis-thymeleaf, mybatis-velocity, mybatis-freemarker,
+                    , mybatis-plus = { mybatis-plus-extension:3.5.2 = {
+                        mybatis-spring, spring-jdbc , spring-context-support , ...
+                        , fastjson:2.0.5 , gjson , ...
+                        , mybatis-plus-core = {
+                            mybatis:3.5.10, mybatis-redis, mybatis-encache
+                            spring-aop,
+                            idworker, jsqlparser:4.4
+                            mybatis-plus-annotation = { mybatis:3.5.10 }
+                       }
+                    }
+                -->
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-dependencies</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-autoconfigure</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${mybatis-plus.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <!-- ********** system-level basic framework -->
+            <!-- | spring |
+                @reference-doc [1] spring-cloud,spring-cloud-alibaba,spring-boot三者的兼容关系 - github - https://github.com/alibaba/spring-cloud-alibaba/wiki/版本说明
+            -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
                 <version>${spring.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
 
-            <!--#[2.2]基础框架依赖-springbootstarter(s)#-->
-            <!--spring-boot-starter-parent-->
-            <!--url:https://search.maven.org/artifact/org.springframework.boot/spring-boot-starter-parent/2.2.13.RELEASE/pom-->
+            <!-- spring boot : spring -->
+            <!-- spring-boot-starter-parent
+                @url:https://search.maven.org/artifact/org.springframework.boot/spring-boot-starter-parent/2.2.13.RELEASE/pom
+            -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId><!--父级工程:spring-boot-dependencies-->
@@ -438,7 +720,7 @@
                 </exclusions>
             </dependency>
 
-            <!--#[2.3]基础框架依赖-springcloud#-->
+            <!-- spring cloud : spring -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -454,28 +736,76 @@
                 <scope>import</scope>
             </dependency>
 
-            <!--#[2.4]基础框架依赖-swagger#-->
-            <!--swagger-->
-            <!--url:https://search.maven.org/artifact/io.swagger/swagger-annotations/2.0.0-rc2/bundle-->
+            <!-- | data validation framework | start -->
+            <!-- jakarta.validation-api : data validation api design standard & framework -->
+            <dependency>
+                <groupId>jakarta.validation</groupId>
+                <artifactId>jakarta.validation-api</artifactId>
+                <version>${jakarta.validation-api.version}</version>
+            </dependency>
+
+            <!-- hibernate-validator | http://hibernate.org/validator/documentation | https://www.cnblogs.com/johnnyzen/p/17824475.html -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate-validator.version}</version>
+            </dependency>
+
+            <!-- org.glassfish:javax.el or org.glassfish:jakarta.el [recommend] (2选1即可) | hibernate-validator 依赖此组件，以防报错:"javax.validation.ValidationException: HV000183: Unable to initialize 'javax.el.ExpressionFactory'. Check that you have the EL dependencies on the classpath, or use ParameterMessageInterpolator instead" -->
+            <!--
+            <dependency>
+                <groupId>org.glassfish</groupId>
+                <artifactId>javax.el</artifactId>
+                <version>${glassfish.javax.el.version}</version>
+            </dependency> -->
+            <dependency>
+                <groupId>org.glassfish</groupId>
+                <artifactId>jakarta.el</artifactId>
+                <version>${glassfish.jakarta.el.version}</version>
+            </dependency>
+
+            <!-- | data validation framework | end -->
+
+            <!-- | web | -->
+            <!-- servlet : web -->
+            <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <!-- 4.0.1 -->
+                <version>${javax.servlet-api.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- actuator (作用 : 健康检查 / 审计 / 统计 / 监控 / HTTP追踪) : system helper -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <!-- | api document management | -->
+            <!-- swagger : api document management -->
+            <!-- @url : https://search.maven.org/artifact/io.swagger/swagger-annotations/2.0.0-rc2/bundle -->
             <dependency>
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-annotations</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
-            <!--url:https://search.maven.org/artifact/io.swagger/swagger-annotations/2.0.0-rc2/bundle-->
-<!--            <dependency>-->
-<!--                <groupId>io.swagger</groupId>-->
-<!--                <artifactId>swagger-annotations</artifactId>-->
-<!--                <version>${swagger.v2.version}</version>-->
-<!--            </dependency>-->
+            <!-- @url : https://search.maven.org/artifact/io.swagger/swagger-annotations/2.0.0-rc2/bundle -->
+            <!--            <dependency>-->
+            <!--                <groupId>io.swagger</groupId>-->
+            <!--                <artifactId>swagger-annotations</artifactId>-->
+            <!--                <version>${swagger.v2.version}</version>-->
+            <!--            </dependency>-->
             <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>${swagger.v3.version}</version>
+                <groupId>io.swagger.core.v3</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger.v3.version}</version>
             </dependency>
-            <!--springfox-swagger-->
-            <!--访问地址http://localhost:port/<context-path>/swagger-ui.html-->
-            <!--url:https://swagger.io/docs//https://swagger.io/docs/specification/2-0/basic-structure/-->
+            <!-- springfox-swagger -->
+            <!-- @access-url : http://localhost:port/<context-path>/swagger-ui.html -->
+            <!-- @url : https://swagger.io/docs//https://swagger.io/docs/specification/2-0/basic-structure/ -->
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
@@ -492,27 +822,103 @@
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${springforx-swagger.version}</version>
             </dependency>
-            <!--swagger-bootstrap-ui-->
-            <!--reference-doc:
-            https://blog.csdn.net/weixin_45630042/article/details/107416127
-            https://blog.csdn.net/qq_43446343/article/details/102984670-->
-            <!--访问地址http://localhost:port/<context-path>/doc.html-->
-            <!--如需要更好看的swagger-ui界面，可切换为本依赖-->
+            <!-- swagger-bootstrap-ui -->
+            <!-- @reference-doc :
+                [1] https://blog.csdn.net/weixin_45630042/article/details/107416127
+                [2] https://blog.csdn.net/qq_43446343/article/details/102984670-->
+            <!-- @access-url : http://localhost:port/<context-path>/doc.html -->
+            <!-- 如需要更好看的swagger-ui界面，可切换为本依赖 -->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>swagger-bootstrap-ui</artifactId>
                 <version>${swagger-bootstrap-ui.version}</version>
             </dependency>
 
-            <!--#[2.5]基础框架依赖-feign#-->
-            <!--方式1:spring-cloud-starter-->
-            <!--url:https://search.maven.org/remotecontent?filepath=org/springframework/cloud/spring-cloud-dependencies/Hoxton.SR12/spring-cloud-dependencies-Hoxton.SR12.pom-->
+            <!-- knife4j / Swagger-UI API Document : api document management
+                 @reference-doc https://blog.csdn.net/adminwxc/article/details/127744816
+            -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j-annotations.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-annotations</artifactId>
+                <version>${knife4j-annotations.version}</version>
+            </dependency>
+
+            <!-- | system communication & system security | -->
+            <!-- jwt component
+                @reference-doc
+                    @link https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
+                    @link https://gitee.com/love-connect-team/love-connect-im-service/blob/dev/pom.xml
+                    @link https://gitee.com/love-connect-team/love-connect-im-service/blob/dev/im-service-common/src/main/java/cn/loveconnect/common/utils/TokenUtils.java
+                    @link https://blog.csdn.net/AdminGuan/article/details/100147488
+            -->
+            <!-- jjwt | Token生成与解析【 使用 jjwt 的话，springBoot 版本不能太高，容易冲突。如果使用springBoot高版本，则需要使用jjwt-api】 -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jwt.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-gson</artifactId>
+                <version>${jjwt-gson.version}</version>
+            </dependency>
+
+            <!-- ********** spring boot/cloud framework related components ********** -->
+
+            <!-- nacos : configuration center & register center -->
+            <!-- nacos configuration center -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+            </dependency>
+
+            <!-- nacos register center -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+            </dependency>
+
+            <!-- https://github.com/nacos-group/nacos-spring-boot-project/wiki/spring-boot-0.2.2-以及-0.1.2版本新功能使用手册 -->
+            <!-- 版本 0.2.x.RELEASE 对应的是 SpringBoot2.x 版本; 版本 0.1.x.RELEASE 对应的是 SpringBoot1.x 版本 -->
+            <!--<dependency>-->
+            <!--<groupId>com.alibaba.boot</groupId>-->
+            <!--<artifactId>nacos-config-spring-boot-starter</artifactId>-->
+            <!--<version>${nacos-config-spring-boot-starter.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+            <!--<groupId>com.alibaba.boot</groupId>-->
+            <!--<artifactId>nacos-discovery-spring-boot-starter</artifactId>-->
+            <!--<version>${nacos-discovery-spring-boot-starter.version}</version>-->
+            <!--</dependency>-->
+            <!-- https://search.maven.org/artifact/com.alibaba.nacos/nacos-spring-context -->
+            <!--<dependency>-->
+            <!--<groupId>com.alibaba.nacos</groupId>-->
+            <!--<artifactId>nacos-spring-context</artifactId>-->
+            <!--<version>1.1.0</version>-->
+            <!--</dependency>-->
+
+            <!-- feign : service call -->
+            <!-- way 1 : spring-cloud-starter -->
+            <!-- url:https://search.maven.org/remotecontent?filepath=org/springframework/cloud/spring-cloud-dependencies/Hoxton.SR12/spring-cloud-dependencies-Hoxton.SR12.pom -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-openfeign</artifactId>
                 <version>${spring-cloud-openfeign.version}</version>
             </dependency>
-            <!--方式2:offcialdependencies-->
+            <!-- way 2 : offcial dependencies -->
             <dependency>
                 <groupId>io.github.openfeign</groupId>
                 <artifactId>feign-core</artifactId>
@@ -546,197 +952,39 @@
                 <version>${openfeign.version}</version>
             </dependency>
 
-            <!--#[2.6]基础框架依赖-nacos:注册中心/配置中心-->
-            <!--nacos注册中心能力-->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-            </dependency>
-            <!--nacos配置中心能力-->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-            </dependency>
-            <!--https://github.com/nacos-group/nacos-spring-boot-project/wiki/spring-boot-0.2.2-以及-0.1.2版本新功能使用手册-->
-            <!--版本0.2.x.RELEASE对应的是SpringBoot2.x版本;版本0.1.x.RELEASE对应的是SpringBoot1.x版本-->
-            <!--<dependency>-->
-            <!--<groupId>com.alibaba.boot</groupId>-->
-            <!--<artifactId>nacos-config-spring-boot-starter</artifactId>-->
-            <!--<version>${nacos-config-spring-boot-starter.version}</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-            <!--<groupId>com.alibaba.boot</groupId>-->
-            <!--<artifactId>nacos-discovery-spring-boot-starter</artifactId>-->
-            <!--<version>${nacos-discovery-spring-boot-starter.version}</version>-->
-            <!--</dependency>-->
-            <!--https://search.maven.org/artifact/com.alibaba.nacos/nacos-spring-context-->
-            <!--<dependency>-->
-            <!--<groupId>com.alibaba.nacos</groupId>-->
-            <!--<artifactId>nacos-spring-context</artifactId>-->
-            <!--<version>1.1.0</version>-->
-            <!--</dependency>-->
 
-            <!--#[2.7]基础框架依赖-orm框架-->
-            <!--mybatis-plus-->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-dependencies</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-autoconfigure</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-starter</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
+            <!-- skywalking : trace request -->
 
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-generator</artifactId>
-                <version>${mybatis-plus.version}</version>
-            </dependency>
+            <!-- ********** third-party-service ********** -->
 
-            <!--#[3.1]数据存储类依赖#-->
-            <!--memoryframeworkdependency-->
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${guava.version}</version>
-            </dependency>
+            <!-- ********** other dependency ********** -->
 
-            <!--mysqldatasourcejdbcdependency-->
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.jdbc.version}</version>
-            </dependency>
 
-            <!--redisdatasourcejdbcdependency-->
-            <dependency>
-                <groupId>redis.clients</groupId>
-                <artifactId>jedis</artifactId>
-                <version>${redis.jdbc.version}</version>
-            </dependency>
-
-            <!--https://mvnrepository.com/artifact/com.alibaba/druid-->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid</artifactId>
-                <version>${dbpool-druid.version}</version>
-            </dependency>
-
-            <!--influxdbdatasourcejdbcdependency-->
-            <dependency>
-                <groupId>org.influxdb</groupId>
-                <artifactId>influxdb-java</artifactId>
-                <version>${influxdb.jdbc.version}</version>
-            </dependency>
-
-            <!--clickhousedatasourcejdbcdependency-->
-            <!--https://github.com/ClickHouse/clickhouse-jdbc-->
-            <!--https://search.maven.org/artifact/ru.yandex.clickhouse/clickhouse-jdbc-->
-            <!--<dependency>
-            <groupId>ru.yandex.clickhouse</groupId>
-            <artifactId>clickhouse-jdbc</artifactId>
-            <version>${clickhouse.jdbc.version}</version>
-            </dependency>-->
-            <dependency>
-                <groupId>com.clickhouse</groupId>
-                <artifactId>clickhouse-jdbc</artifactId>
-                <version>${clickhouse.jdbc.version}</version>
-            </dependency>
-            <!--https://github.com/ClickHouse/clickhouse-jdbc/tree/v0.3.2/clickhouse-client-->
-            <dependency>
-                <groupId>com.clickhouse</groupId>
-                <artifactId>clickhouse-http-client</artifactId>
-                <version>${clickhouse.jdbc.version}</version>
-            </dependency>
-
-            <!--neo4j(graphdatabase)-->
-            <dependency>
-                <groupId>org.neo4j.driver</groupId>
-                <artifactId>neo4j-java-driver</artifactId>
-                <version>${neo4j.jdbc.version}</version>
-            </dependency>
-
-            <!--easyexcel
-            [1]easyexcel-https://easyexcel.opensource.alibaba.com/
-            -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>easyexcel</artifactId>
-                <version>${easyexcel.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>javax.validation</groupId>
-                <artifactId>validation-api</artifactId>
-                <version>2.0.1.Final</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>3.9</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>2.0.3</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.hubspot.jinjava</groupId>
-                <artifactId>jinjava</artifactId>
-                <version>2.5.6</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>guava</artifactId>
-                        <groupId>com.google.guava</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
-            <dependency>
-                <groupId>org.codehaus.groovy</groupId>
-                <artifactId>groovy-all</artifactId>
-                <type>pom</type>
-                <version>3.0.7</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-actuator</artifactId>
-                <version>${spring-boot.version}</version>
-            </dependency>
-
-            <!-- es sql 插件 -->
-            <!--            <dependency>-->
-            <!--                <groupId>com.amazon.opendistroforelasticsearch.client</groupId>-->
-            <!--                <artifactId>opendistro-sql-jdbc</artifactId>-->
-            <!--                <version>${opendistro-sql-jdbc.version}</version>-->
-            <!--            </dependency>-->
-
+            <!-- ********** the current parent project's sub modules ********** -->
             <!--
-            @functionMarkdownJava解析器
-            @reference-doc
-            [1]commonmark-java-codingdict-https://www.codingdict.com/os/software/51515-->
             <dependency>
-                <groupId>com.atlassian.commonmark</groupId>
-                <artifactId>commonmark</artifactId>
-                <version>${commonmark-java.version}</version>
+                <groupId>com.knowdata</groupId>
+                <artifactId>knowdata-service-domain</artifactId>
+                <version>${project.parent.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>lombok</artifactId>
+                        <groupId>org.projectlombok</groupId>
+                    </exclusion>
+                </exclusions>
             </dependency>
+            <dependency>
+                <groupId>com.knowdata</groupId>
+                <artifactId>knowdata-service-common</artifactId>
+                <version>${project.parent.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>lombok</artifactId>
+                        <groupId>org.projectlombok</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            -->
 
             <!--apacheskywalking-->
             <!--            <dependency>-->
@@ -759,41 +1007,19 @@
             <!--                <artifactId>apm-toolkit-trace</artifactId>-->
             <!--                <version>${skywalking.apm-application-toolkit.version}</version>-->
             <!--            </dependency>-->
-
-            <!-- jjwt -->
-            <!-- Token生成与解析【 使用jjwt的话，springBoot版本不能太高，容易冲突。如果使用springBoot高版本，则需要使用jjwt-api】-->
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt-api</artifactId>
-                <version>${jwt.version}</version>
-            </dependency>
-
-            <!--  jwt -->
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt-impl</artifactId>
-                <version>${jwt.version}</version>
-                <scope>runtime</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt-gson</artifactId>
-                <version>${jjwt-gson.version}</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
     <build>
-        <pluginManagement><!--lockdownpluginsversionstoavoidusingMavendefaults(maybemovedtoparentpom)-->
+        <pluginManagement>
+            <!-- lock down plugins versions to a void using Maven defaults(maybe moved to parent pom)-->
             <plugins>
-                <!--cleanlifecycle,seehttps://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle-->
+                <!-- clean lifecycle,see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>${maven-clean-plugin.version}</version>
                 </plugin>
-                <!--defaultlifecycle,jarpackaging:seehttps://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging-->
+                <!-- default lifecycle,jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>${maven-resources-plugin.version}</version>
@@ -814,7 +1040,7 @@
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>${maven-deploy-plugin-version}</version>
                 </plugin>
-                <!--sitelifecycle,seehttps://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle-->
+                <!-- site lifecycle,see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
                     <version>${maven-site-plugin.version}</version>
@@ -824,23 +1050,23 @@
                     <version>${maven-project-info-reports-plugin.version}</version>
                 </plugin>
 
-                <!--mavenreleaseplugin-->
-                <!--reference-doc:mavenrelease流水线-https://mindoc.loveconnect.cn/docs/bigdata/bigdata-1e65kkjb8afmg-->
+                <!-- maven release plugin -->
+                <!-- reference-doc:maven release流水线-https://mindoc.loveconnect.cn/docs/bigdata/bigdata-1e65kkjb8afmg -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
                     <configuration>
-                        <!--执行目标|install:发布到本地仓库,deploy:发布到私服仓库-->
+                        <!-- 执行目标 | install : 发布到本地仓库, deploy:发布到私服仓库 -->
                         <goals>deploy</goals>
-                        <!--是否生成release-pom.xml-->
+                        <!-- 是否生成 release-pom.xml -->
                         <generateReleasePoms>false</generateReleasePoms>
-                        <!--跳过单元测试-->
+                        <!-- 跳过单元测试 -->
                         <arguments>-DskipTests</arguments>
-                        <!--是否自动为子模块分配父工程版本。若设置为false，将提示用户输入每个子模块的版本-->
+                        <!-- 是否自动为子模块分配父工程版本。若设置为false，将提示用户输入每个子模块的版本 -->
                         <autoVersionSubmodules>true</autoVersionSubmodules>
-                        <!--tag分支的名称(project.version仅包含版本，不包含SNAPSHOT后缀)-->
+                        <!-- tag分支的名称(project.version仅包含版本，不包含SNAPSHOT后缀) -->
                         <tagNameFormat>v@{project.version}</tagNameFormat>
-                        <!--发布时无需检查是否与VCS（SVN/GIT）相比发生修改的文件-->
+                        <!-- 发布时无需检查是否与VCS（SVN/GIT）相比发生修改的文件 -->
                         <checkModificationExcludes>
                             <checkModificationExclude>.project</checkModificationExclude>
                             <checkModificationExclude>.classpath</checkModificationExclude>
@@ -862,11 +1088,11 @@
                     </configuration>
                 </plugin>
 
-                <!--添加git-commit-id-plugin插件，用以产生git版本信息-->
-                <!--1)用法1:mvncleangit-commit-id:revisioninstall-->
-                <!--2)用法2:acturtor+`management.info.git.mode=full`=>http://127.0.0.1:9527/actuator/info-->
-                <!--reference-doc:https://blog.csdn.net/dyc87112/article/details/73739530-->
-                <!--reference-doc:https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto.build.generate-git-info-->
+                <!-- 添加git-commit-id-plugin插件，用以产生git版本信息 -->
+                <!-- 1)用法1:mvncleangit-commit-id:revisioninstall -->
+                <!-- 2)用法2:acturtor+`management.info.git.mode=full`=>http://127.0.0.1:9527/actuator/info -->
+                <!-- reference-doc:https://blog.csdn.net/dyc87112/article/details/73739530 -->
+                <!-- reference-doc:https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto.build.generate-git-info -->
                 <plugin>
                     <groupId>pl.project13.maven</groupId>
                     <artifactId>git-commit-id-plugin</artifactId>
@@ -885,7 +1111,7 @@
                         <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
                     </configuration>
                 </plugin>
-                <!--springbootplugin-->
+                <!-- springboot plugin -->
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
@@ -904,18 +1130,18 @@
                 </configuration>
             </plugin>
 
-            <!--reference-doc:idea中使用maven配置sonar-CSDN-https://blog.csdn.net/weixin_43931108/article/details/116915196-->
-            <!--sonar插件-->
+            <!-- reference-doc:idea中使用maven配置sonar-CSDN-https://blog.csdn.net/weixin_43931108/article/details/116915196 -->
+            <!-- sonar插件 -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>${sonar-maven-plugin.version}</version>
             </plugin>
             <!--@reference-doc:
-            SonarQube本地配置-Mindoc-https://mindoc.loveconnect.cn/docs/bigdata/bigdata-1e6buemkng4f9
-            Java单元测试覆盖率分析，并同步至Sonar-博客园-https://www.cnblogs.com/king0207/p/14587357.html
+                [1] SonarQube本地配置-Mindoc-https://mindoc.loveconnect.cn/docs/bigdata/bigdata-1e6buemkng4f9
+                [2] Java单元测试覆盖率分析，并同步至Sonar-博客园-https://www.cnblogs.com/king0207/p/14587357.html
             -->
-            <!--@description:可生成代码覆盖率统计数据-->
+            <!-- @description:可生成代码覆盖率统计数据 -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -931,7 +1157,7 @@
                     </execution>
                     <execution>
                         <id>generate-code-coverage-report</id>
-                        <phase>test</phase><!--仅在执行mvntest命令中生效-->
+                        <phase>test</phase><!-- 仅在执行mvntest命令中生效 -->
                         <goals>
                             <goal>report</goal>
                         </goals>
@@ -967,10 +1193,10 @@
     <!--    </distributionManagement>-->
 
     <profiles>
-        <!--@note本地扫描并上传sonar扫描报告时，取消本profile的注释，并执行本maven命令：mvncleaninstallsonar:sonar-->
-        <!--@function增加sonarqube配置-->
-        <!--@reference-doc:
-        SonarQube本地配置-Mindoc- https://mindoc.know-data.com/docs/bigdata/xxx43435345
+        <!-- @note 本地扫描并上传sonar扫描报告时，取消本profile的注释，并执行本maven命令：mvn clean install sonar:sonar -->
+        <!-- @function 增加sonarqube配置 -->
+        <!-- @reference-doc:
+                [1] SonarQube本地配置 - Mindoc - https://mindoc.know-data.com/docs/bigdata/xxx43435345
         -->
         <!--<profile>-->
         <!--<id>sonar</id>-->
