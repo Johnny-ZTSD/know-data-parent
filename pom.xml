@@ -11,7 +11,7 @@
 
     <modules>
         <module>know-data-core</module>
-        <module>know-data-study</module>
+        <module>know-data-study-parent</module>
         <module>know-data-event</module>
         <module>know-data-test</module>
         <module>know-data-data-dict</module>
