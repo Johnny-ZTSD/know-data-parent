@@ -1,9 +1,5 @@
 /target/*
 **/target/*
-*/target/*
-*/*/target/*
-*/*/*/target/*
-*/*/*/*/target/*
 .idea/*
 *.iml
 **.iml
