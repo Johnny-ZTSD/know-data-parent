@@ -20,7 +20,6 @@
         <module>know-data-bms</module>
         <module>know-data-executor</module>
         <module>know-data-bdp-servers</module>
-        <module>know-data-study-parent/know-data-study-flink</module>
     </modules>
 
     <name>know-data-parent</name>
