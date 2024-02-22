@@ -1,4 +1,5 @@
 /target/*
+**/target/*
 */target/*
 */*/target/*
 */*/*/target/*
@@ -6,10 +7,6 @@
 .idea/*
 *.iml
 **.iml
-**/*.iml
-/*/*.iml
-/*/*/*.iml
-/*/*/*/*.iml
 /*/dependency-reduced-pom.xml
 /logs/*
 /*/logs/*
