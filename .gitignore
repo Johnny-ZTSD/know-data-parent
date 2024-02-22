@@ -5,10 +5,7 @@
 **.iml
 /*/dependency-reduced-pom.xml
 /logs/*
-/*/logs/*
-/*/*/logs/*
-/*/*/*/logs/*
-/*/*/*/*/logs/*
+**/logs/*
 pom.xml.releaseBackup
 */pom.xml.releaseBackup
 **/pom.xml.releaseBackup
