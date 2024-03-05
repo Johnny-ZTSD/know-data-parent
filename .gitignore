@@ -5,6 +5,7 @@
 /target/*
 */target/*
 **/target/*
+**.class
 /out/*
 **/out/*
 /*/dependency-reduced-pom.xml
