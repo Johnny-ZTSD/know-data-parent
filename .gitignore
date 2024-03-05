@@ -1,15 +1,21 @@
-/target/*
 .idea/*
-*/target/*
 /*/*.iml
 *.iml
+**.iml
+/target/*
+*/target/*
+**/target/*
+/out/*
+**/out/*
 /*/dependency-reduced-pom.xml
 /logs/*
 */logs/*
+**/logs/*
 pom.xml.releaseBackup
 */pom.xml.releaseBackup
+**/pom.xml.releaseBackup
 .run/*
+*/*/skywalking-agent
 
 .settings/
 application-config.yml
-application-local.yml
