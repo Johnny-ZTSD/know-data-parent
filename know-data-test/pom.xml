@@ -4,9 +4,16 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.know-data.framework</groupId>
+  <parent>
+    <groupId>com.know-data.framework</groupId>
+    <artifactId>know-data-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <!--<groupId>com.know-data.framework</groupId>-->
   <artifactId>know-data-test</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <!--<version>1.0.0-SNAPSHOT</version>-->
 
   <name>know-data-test</name>
   <!-- FIXME change it to the project's website -->
@@ -14,11 +21,17 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>com.know-data.framework</groupId>
+      <artifactId>know-data-core</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

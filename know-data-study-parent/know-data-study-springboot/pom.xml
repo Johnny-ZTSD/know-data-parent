@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- spring boot -->
+  <!-- https://docs.spring.io/spring-boot/docs/2.7.18/reference/html/getting-started.html#getting-started -->
+  <!-- 截止 2024.3.4 , 支持 java 8 的 spring 2.x 系列的最新版本是 : 2.7.18 -->
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.7.18</version>
+    <relativePath/>
+    <!--<version>${spring-boot.version}</version>-->
+  </parent>
+
+  <groupId>com.know-data.framework</groupId>
+  <artifactId>know-data-study-springboot</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+
+  <name>know-data-study-springboot</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+
+    <junit.version>4.13.1</junit.version>
+    <spring-boot.version>2.7.18</spring-boot.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-autoconfigure</artifactId>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+
+        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>sonatype-nexus-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+
+    <repository>
+      <id>alimaven</id>
+      <name>aliyun maven</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+    </repository>
+
+    <repository>
+      <id>activiti-repos2</id>
+      <name>Activiti Repository 2</name>
+      <url>https://app.camunda.com/nexus/content/groups/public</url>
+    </repository>
+
+    <repository>
+      <id>springsource-repos</id>
+      <name>SpringSource Repository</name>
+      <url>http://repo.spring.io/release/</url>
+    </repository>
+
+    <repository>
+      <id>central-repos</id>
+      <name>Central Repository</name>
+      <url>http://repo.maven.apache.org/maven2</url>
+    </repository>
+
+    <repository>
+      <id>central-repos1</id>
+      <name>Central Repository 2</name>
+      <url>http://repo1.maven.org/maven2/</url>
+    </repository>
+
+    <repository>
+      <id>activiti-repos</id>
+      <name>Activiti Repository</name>
+      <url>https://maven.alfresco.com/nexus/content/groups/public</url>
+    </repository>
+
+    <repository>
+      <id>oschina-repos</id>
+      <name>Oschina Releases</name>
+      <url>http://maven.oschina.net/content/groups/public</url>
+    </repository>
+
+    <repository>
+      <id>thinkgem-repos</id>
+      <name>ThinkGem Repository</name>
+      <url>http://git.oschina.net/thinkgem/repos/raw/master</url>
+    </repository>
+
+    <repository>
+      <id>java-repos</id>
+      <name>Java Repository</name>
+      <url>http://download.java.net/maven/2/</url>
+    </repository>
+
+    <repository>
+      <id>thinkgem-repos2</id>
+      <name>ThinkGem Repository 2</name>
+      <url>https://raw.github.com/thinkgem/repository/master</url>
+    </repository>
+
+  </repositories>
+</project>

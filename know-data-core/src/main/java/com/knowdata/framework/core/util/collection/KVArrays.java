@@ -12,7 +12,6 @@ public class KVArrays<K, V> {
     private V[] valueArray;
 
     public KVArrays() {
-
     }
 
     public KVArrays(K[] keyArray, V[] valueArray) {

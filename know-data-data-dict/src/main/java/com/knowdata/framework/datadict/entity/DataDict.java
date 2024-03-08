@@ -29,7 +29,7 @@ import org.apache.ibatis.type.JdbcType;
 @ApiModel("数据字典表")
 @TableName(DataDict.TABLE_NAME_PARAM)
 public class DataDict extends AbstractEntity {
-    public final static String TABLE_NAME_PARAM = "ds_data_dict";
+    public final static String TABLE_NAME_PARAM = "kd_data_dict";
 
     /**
      * context 字段的默认值

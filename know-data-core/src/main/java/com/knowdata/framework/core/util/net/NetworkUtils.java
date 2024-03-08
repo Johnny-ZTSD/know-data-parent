@@ -1,6 +1,14 @@
 package com.knowdata.framework.core.util.net;
 
+import com.knowdata.framework.core.util.lang.ObjectUtils;
 import com.knowdata.framework.core.util.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.*;
 
 /**
  * @author johnnyzen
@@ -13,6 +21,119 @@ import com.knowdata.framework.core.util.lang.StringUtils;
  */
 
 public class NetworkUtils {
+    private final static Logger logger = LoggerFactory.getLogger(NetworkUtils.class);
+
+    /**
+     * 是否能够成功 PING 通网络
+     * @description 前提远程服务器未开启对端口(7 ECHO)的防火墙，且启用了 ICMP 协议
+     *  远程主机的端口 7 ECHO : 影响 isReachable
+     * @reference-doc
+     *  [1] java ping ip java ping ip三种方法 - 51cto - https://blog.51cto.com/u_16099267/7019367
+     * @param hostname
+     * @param timeout 超时时长，单位：毫秒 | default = 3000
+     * @return
+     * @throws Exception
+     */
+    public static boolean pingTest(String hostname, Integer timeout) throws Exception {
+        long startTime = System.currentTimeMillis();
+        timeout = ObjectUtils.isEmpty(timeout) ? 3000 : timeout;
+        InetAddress inetAddress = InetAddress.getByName(hostname);
+        boolean status = inetAddress.isReachable(timeout); //若返回 true ，说明 host 可用；反之， host 不可用
+        long endTime = System.currentTimeMillis();
+        return status;
+    }
+
+    /**
+     * 是否能够成功 PING 通网络 (通过本地执行 Command(CMD/SHELL) 命令)
+     * @description 前提远程服务器未开启对端口(7 ECHO)的防火墙，且启用了 ICMP 协议
+     *  远程主机的端口 7 ECHO : 影响 isReachable
+     * @reference-doc
+     *  [1] java ping ip java ping ip三种方法 - 51cto - https://blog.51cto.com/u_16099267/7019367
+     * @param hostname
+     * @return
+     * @throws Exception
+     */
+    public static String pingByCommand(String hostname){
+        StringBuilder response = new StringBuilder();
+        String line = null;
+        try {
+            Process process = Runtime.getRuntime().exec("ping " + hostname);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
+                  process.getInputStream() , "GBK"
+            ) );
+            logger.debug("The response content of Ping the hostname({}) by cmd : ", hostname);
+            while ( (line = bufferedReader.readLine()) != null ) {
+                response.append(line);
+                logger.debug(line);
+            }
+        } catch (Exception exception) {
+            logger.error("Fail to ping by cmd! hostname: {}, exception : {}", hostname, exception);
+        }
+        return response.toString();
+    }
+
+    /**
+     * 检测API是否能连通
+     * 只能通过状态码是否为404判断，如果网络不通则会连接失败到 catch 中返回false
+     * @reference-doc
+     *  [1] Java检测网络是否连通检查ip、URL和API接口 - CSDN - https://blog.csdn.net/m0_46085118/article/details/130840882
+     * @param url
+     * @param httpMethod 例如 : "GET" / "POST" / ...
+     * @return
+     */
+    public static boolean urlTest(String url, String httpMethod) {
+        try {
+            URL urlObject = new java.net.URL(url);
+            HttpURLConnection connection = (HttpURLConnection) urlObject.openConnection();
+            connection = (HttpURLConnection) urlObject.openConnection();
+            connection.setRequestProperty("User-Agent", "Mozilla/4.0");
+            connection.setRequestMethod(httpMethod.toUpperCase());//"GET" / "POST" / ...
+            // 设置单次请求是否支持重定向，默认为 setFollowRedirects 方法设置的值
+            connection.setInstanceFollowRedirects(false);//是否支持重定向
+            connection.setConnectTimeout(1000);
+            connection.connect();
+            logger.debug("url : {} , response code : {}", url, connection.getResponseCode());
+            if (connection.getResponseCode() != 404) {//判断状态码
+                return true;
+            } else {
+                return false;
+            }
+        } catch (IOException exception) {
+            logger.warn("Fail to check the url cause that the `IOException`! url : {}, exception : {}", url, exception);
+            return false;
+        }
+    }
+
+    /**
+     * 测试ip及端口连通性
+     * @param host
+     * @param port [1, 65535]
+     * @param timeout ms
+     * @return boolean
+     */
+    public static boolean hostAndPortTest(String host, int port, int timeout) {
+        Socket socket = new Socket();
+        boolean status = false;
+        try {
+            socket.connect(new InetSocketAddress(host, port), timeout);
+            if(socket.isConnected()){
+                logger.debug("Success to test and access the network resource! <host:port> = {}:{}, isConnected : {}", host, port, socket.isConnected());//ip及端口访问正常
+                status = true;
+            } else {
+                logger.warn("Fail to test and access the network resource!<host:port> = {}:{}, isConnected : {}", host, port, socket.isConnected());//无法访问
+            }
+        } catch (IOException exception) {
+            logger.warn("Fail to test and access the network resource!<host:port> = {}:{}, io exception : {}", host, port, exception);//无法访问
+        } finally {
+            try {
+                socket.close();
+            } catch (IOException exception) {
+                logger.warn("Fail to close the socket when test and access the network resource!<host:port> = {}:{}, io exception : {}", host, port, exception);//关闭socket异常
+            }
+        }
+        return status;
+    }
+
     /**
      * 是否为内网IP
      * @description

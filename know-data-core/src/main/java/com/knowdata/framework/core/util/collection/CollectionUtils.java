@@ -103,4 +103,42 @@ public class CollectionUtils {
     public static <T extends Collection> boolean isNotEmpty(T bean){
         return !isEmpty(bean);
     }
+
+    /**
+     * 求两集合(set1-set2)的差集
+     * @description
+     *  CASE 1 : set1 = { 1,2,3 } ; set2 = { 2 , 4 , 5 } => result : { 1 , 3 }
+     *  CASE 2 : set1 = { 2 , 4 , 5 } ; set2 = { 1,2,3 } => result : { 4,  5 }
+     **/
+    public static <T> Set<T> subtract(Set<T> setA, Set<T> setB) {
+        Set<T> resSet = new HashSet<>(setA);
+        resSet.removeAll(setB);
+        return resSet;
+    }
+
+
+    /**
+     * 取交集（取两个集合中都存在的元素）
+     * @return
+     */
+    public static <T> Set<T> intersection(Set<T> setA, Set<T> setB){
+        Set<T> resSet = new HashSet<>(setA);
+        /**
+         * retainAll(collectiion) : 用于保留集合中属于另一集合的元素，同时移除不属于另一个集合的元素
+         *  注: 本方法会修改当前集合，使其包含与指定集合相同的元素
+         */
+        resSet.retainAll(setB);
+        return resSet;
+    }
+
+    /**
+     * 取并集
+     * @return
+     */
+    public static <T> Set<T> union(Set<T> setA, Set<T> setB){
+        Set<T> resSet = new HashSet<>();
+        resSet.addAll(setA);
+        resSet.addAll(setB);
+        return resSet;
+    }
 }

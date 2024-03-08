@@ -22,7 +22,7 @@ public class StringUtils {
     private final static Logger logger = LoggerFactory.getLogger(StringUtils.class);
 
     /**
-     * @description 注意区分，与 ObjectUtils#isEmpty 的不同
+     * @description 注意区分，与 {@link ObjectUtils#isEmpty } 的不同
      * @param str
      * @return
      */
