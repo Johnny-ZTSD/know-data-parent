@@ -20,6 +20,7 @@
         <module>know-data-bms</module>
         <module>know-data-executor</module>
         <module>know-data-bdp-servers</module>
+        <!--<module>know-data-study-parent/know-data-stud-fault-tree-analysis</module>-->
     </modules>
 
     <name>know-data-parent</name>
@@ -1265,6 +1266,17 @@
 
     <!-- Maven pom.xml 中添加指定的中央仓库 - CSDN - https://blog.csdn.net/tiantiandjava/article/details/50736343 -->
     <repositories>
+<!--        <repository>
+            <id>local-repo</id>
+            <url>D:\Program_Data\maven_repository</url>
+        </repository>-->
+
+        <repository>
+            <id>springsource-milestones</id>
+            <name>SpringSource Milestones Proxy</name>
+            <url>https://oss.sonatype.org/content/repositories/springsource-milestones</url>
+        </repository>
+
         <repository>
             <!-- Maven 自带的中央仓库使用的Id为 central. 如果其他的仓库声明也是用该Id, 就会覆盖中央仓库的配置 -->
             <id>mvnrepository</id>
