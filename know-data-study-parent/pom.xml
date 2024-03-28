@@ -32,6 +32,7 @@
       <module>know-data-study-spark</module>
       <module>know-data-study-flink</module>
       <module>know-data-stud-fault-tree-analysis</module>
+        <module>know-data-study-nacos</module>
     </modules>
 
   <properties>
