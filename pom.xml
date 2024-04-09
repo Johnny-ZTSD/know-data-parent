@@ -20,6 +20,7 @@
         <module>know-data-bms</module>
         <module>know-data-executor</module>
         <module>know-data-bdp-servers</module>
+        <module>know-data-study-parent/know-data-study-email</module>
         <!--<module>know-data-study-parent/know-data-stud-fault-tree-analysis</module>-->
     </modules>
 
@@ -289,6 +290,8 @@
 
 
         <!-- ********** <L2> other dependency [start] ********** -->
+
+        <javax.mail.version>1.6.2</javax.mail.version>
 
         <!-- ********** <L2> other dependency [end] ********** -->
 
