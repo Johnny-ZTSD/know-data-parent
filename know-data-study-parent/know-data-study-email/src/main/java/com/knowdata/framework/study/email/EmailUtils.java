@@ -26,18 +26,19 @@ public class EmailUtils {
      * @param subject 邮件主题
      * @param content 邮件内容
      * @param debug 是否调试会话
+     * @return boolean : true - send success / false - send fail
      */
-    public static void sendEmail(
+    public static boolean sendEmail(
         EmailSenderConfiguration emailSenderConfiguration
         , String receiverEmail
         , String subject
         , String content
         , Boolean debug
     ){
+        boolean result = true;
         try {
             //1.创建Session
             Session session = createSession(emailSenderConfiguration, debug);
-            System.out.println(session);
 
             //2.创建邮件对象
             MimeMessage message = new MimeMessage(session);
@@ -56,11 +57,23 @@ public class EmailUtils {
 
             //3.发送邮件
             Transport.send(message);
-        } catch (AddressException e) {
-            e.printStackTrace();
-        } catch (MessagingException e) {
-            e.printStackTrace();
+        } catch (AddressException exception) {
+            result = false;
+            log.error("Fail to send email and throw a `AddressException`! email-sender: {}, email-receiver: {}, exception : {}", emailSenderConfiguration.getEmailAccount(), receiverEmail, exception);
+        } catch (MessagingException exception) {
+            result = false;
+            log.error("Fail to send email and throw a `MessagingException`! email-sender: {}, email-receiver: {}, exception : {}", emailSenderConfiguration.getEmailAccount(), receiverEmail, exception);
         }
+        return result;
+    }
+
+    public static boolean sendEmail(
+            EmailSenderConfiguration emailSenderConfiguration
+            , String receiverEmail
+            , String subject
+            , String content
+    ){
+        return sendEmail(emailSenderConfiguration, receiverEmail, subject, content);
     }
 
     /**
@@ -86,7 +99,6 @@ public class EmailUtils {
             }
         });
         session.setDebug( (debug==null) || (debug==false) ? false : true);
-        //System.out.println(session);
         return session;
     }
 }

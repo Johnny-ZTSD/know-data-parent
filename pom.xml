@@ -148,7 +148,8 @@
         <slf4j.version>1.7.25</slf4j.version>
         <!-- log4j2 / log implements framework : log -->
         <!-- 1.x:log4j(log4j.properties)|2.x:log4j2(支持log4j2.properties中动态读取env/环境变量等特性) -->
-        <log4j.version>2.13.3</log4j.version>
+        <!-- 2.13.3 / 2.20.0 -->
+        <log4j.version>2.20.0</log4j.version>
         <spring-boot-starter-log4j.version>1.3.8.RELEASE</spring-boot-starter-log4j.version>
 
         <!-- <L3> log [end] -->
