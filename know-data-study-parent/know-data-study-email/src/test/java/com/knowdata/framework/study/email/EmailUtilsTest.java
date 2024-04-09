@@ -11,10 +11,16 @@ public class EmailUtilsTest {
     /**
      * 发送邮件测试
      */
-    //@Test
+    @Test
     public void sendEmailTest(){
-        EmailSenderConfiguration emailSenderConfiguration = EmailSenderConfiguration.getQqEmailConfig("xxxxx@qq.com", "xxxxxxx");
-        Boolean result = EmailUtils.sendEmail(emailSenderConfiguration, "yyyyy@foxmail.com", "test-subject3", "test-content", false);
+        EmailSenderConfiguration emailSenderConfiguration = EmailSenderConfiguration.getQqEmailConfig("xxxx@qq.com", "xxxx");
+        Boolean result = EmailUtils.sendEmail(
+            emailSenderConfiguration
+            , "xxxx@foxmail.com"
+            , "test-subject3"
+            , "test-content"
+            , true
+        );
         log.info("result:{}", result);
     }
 

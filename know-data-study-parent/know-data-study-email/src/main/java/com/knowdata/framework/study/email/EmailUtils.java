@@ -14,6 +14,7 @@ import java.util.Properties;
  * @reference-doc
  *  [0] https://mvnrepository.com/artifact/com.sun.mail/javax.mail/1.6.2
  *  [1] java实现发送邮件 - CSDN - https://blog.csdn.net/weixin_72764731/article/details/131614442
+ *  [2] SpringBoot配置Email发送功能 - CSDN - https://blog.csdn.net/UncleTian/article/details/94436387
  * @description SMTP协议为邮件发送协议,在java应用程序中,可以使用SMTP协议实现发送邮件的功能。
  */
 @Slf4j
@@ -73,7 +74,7 @@ public class EmailUtils {
             , String subject
             , String content
     ){
-        return sendEmail(emailSenderConfiguration, receiverEmail, subject, content);
+        return sendEmail(emailSenderConfiguration, receiverEmail, subject, content, false);
     }
 
     /**
