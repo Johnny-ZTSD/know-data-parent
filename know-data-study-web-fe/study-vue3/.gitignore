@@ -1,0 +1,28 @@
+# @reference-doc https://blog.csdn.net/weixin_42919342/article/details/128722944
+
+# 必须ignore
+node_modules/
+# 生成的测试报告
+coverage/
+# 生成的日志文件
+server/logs/
+# 打包构建出的dist文件
+dist/
+# 测试时下载的mock数据
+test/mock/
+# Mac电脑生成的元数据文件
+.DS_Store
+
+# npm/yarn 日志
+npm-debug.log
+npm-error.log
+yarn-error.log
+yarn-debug.log
+
+# 使用yarn.lock则忽略
+package-lock.json
+
+# jet brains家ide生成的配置,用vscode则忽略
+.idea/
+# cache文件
+.stylelintcache
