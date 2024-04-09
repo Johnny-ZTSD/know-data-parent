@@ -213,9 +213,14 @@
         <!-- <L3> orm [start] -->
 
         <!-- mybatis : orm -->
-        <mybatis.version>3.5.10</mybatis.version>
+        <!-- 3.5.10 / 3.5.13 -->
+        <mybatis.version>3.5.13</mybatis.version>
         <!-- mybatis-plus:3.5.2 inner mybatis version = 3.5.10 -->
-        <mybatis-plus.version>3.5.2</mybatis-plus.version>
+        <!-- 3.5.2 / 3.5.4 | https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-extension/3.5.4 -->
+        <mybatis-plus.version>3.5.4</mybatis-plus.version>
+        <mybatis-spring.version>2.1.1</mybatis-spring.version>
+        <mybatis-spring-boot-starter>1.4.7</mybatis-spring-boot-starter>
+        <pagehelper-spring-boot-starter>2.3.1</pagehelper-spring-boot-starter>
 
         <!-- <L3> orm [end] -->
 
