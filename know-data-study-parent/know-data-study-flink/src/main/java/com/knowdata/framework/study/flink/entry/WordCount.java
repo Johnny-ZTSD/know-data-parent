@@ -3,6 +3,7 @@ package com.knowdata.framework.study.flink.entry;
 import cn.hutool.core.lang.Tuple;
 import com.knowdata.framework.study.flink.utils.SecurityUtils;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.RuntimeExecutionMode;
 import org.apache.flink.api.common.functions.*;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
@@ -14,6 +15,7 @@ import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.configuration.Configuration;
+import org.apache.flink.configuration.RestOptions;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
@@ -61,17 +63,25 @@ public class WordCount {
      *      2> (Hello World,2,WORLD)
      * @param args
      * @throws Exception
+     * @reference-doc
+     *  [1] Flink Configuration 配置文件的配置 - CSDN - https://blog.csdn.net/hell_oword/article/details/124524377
+     *  [2] 【Flink源码篇】Flink提交流程之flink-conf.yaml的解析和3种flink命令行客户端的添加 - CSDN - https://blog.csdn.net/yy8623977/article/details/125768457
+     *      env : FLINK_CONF_DIR | $FLINK_HOME/conf/flink-conf.yaml
+     *  [3] Flink 指南与Hudi - hudi - https://hudi.incubator.apache.org/cn/docs/next/flink-quick-start-guide/
+     *  [4] 【flink配置系列】FLink配置大全 - CSDN - https://blog.csdn.net/wang2leee/article/details/133808565
      */
     public static void main(String[] args) throws Exception {
         logger.info("job startup - start");
         // 1.准备环境
-        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        StreamExecutionEnvironment env = createStreamExecutionEnvironment();
+
+        // 设置作业参数
+        //ExecutionConfig config = env.getConfig();
         // 设置运行模式 | STREAMING, BATCH , AUTOMATIC
         env.setRuntimeMode(RuntimeExecutionMode.AUTOMATIC);
         // 设置时间语义
         //env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);//事件时间
         env.setStreamTimeCharacteristic(TimeCharacteristic.ProcessingTime);//处理时间[Flink 默认值]
-
 
         //(可选) 设置重启策略 | 没有指定重启策略，在本地部署时，不需要指定重启策略。
         env.setRestartStrategy(RestartStrategies.fixedDelayRestart(
@@ -174,5 +184,28 @@ public class WordCount {
         env.execute(JOB_NAME);
 
         logger.info("job startup - end");
+    }
+
+    /**
+     * @reference-doc
+     *  [1] [Flink] Flink Job之Web UI - CSDN - https://www.cnblogs.com/johnnyzen/p/18003007
+     * @return
+     */
+    public static StreamExecutionEnvironment createStreamExecutionEnvironment(){
+        // step1 定义作业配置
+        Configuration jobConfiguration = new Configuration();
+
+        //设置WebUI绑定的本地端口
+        //jobConfiguration.setInteger(RestOptions.PORT, 18081);//"rest.port" / RestOptions.PORT 均可 | 注: 8081 是默认端口
+        jobConfiguration.setString(RestOptions.BIND_PORT, "18081");//样例值： "18081"、"8082-8089"
+        jobConfiguration.setString(RestOptions.ADDRESS, "127.0.0.1");//"rest.address"
+        jobConfiguration.setString(RestOptions.BIND_ADDRESS, "0.0.0.0");//"rest.bind-address" : 0.0.0.0
+
+        //step2 基于作业配置，创建执行环境
+        //StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();//方式1 : 不启用 WEB UI
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(jobConfiguration);//方式2 : 本地运行模式 + 启用 WEB UI
+        //StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment(jobConfiguration);//方式3 : 集群运行模式 + 启用 WEB UI
+
+        return env;
     }
 }
