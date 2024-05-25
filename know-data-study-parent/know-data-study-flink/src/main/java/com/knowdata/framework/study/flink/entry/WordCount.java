@@ -188,7 +188,7 @@ public class WordCount {
 
     /**
      * @reference-doc
-     *  [1] [Flink] Flink Job之Web UI - CSDN - https://www.cnblogs.com/johnnyzen/p/18003007
+     *  [1] [Flink] Flink Job之Web UI - 博客园/千千寰宇 - https://www.cnblogs.com/johnnyzen/p/18003007
      * @return
      */
     public static StreamExecutionEnvironment createStreamExecutionEnvironment(){
