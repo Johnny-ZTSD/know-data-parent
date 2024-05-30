@@ -9,7 +9,7 @@ import org.junit.Test;
 @Slf4j
 public class ExceptionTest {
     public static String targetMethod(String input) {
-        String result = null;
+        String result = "EMPTY";
         try {
             if(input != null && input.length() <= 2){
                 result = input.toLowerCase();
@@ -31,8 +31,8 @@ public class ExceptionTest {
         log.info("return : {}", targetMethod("Hello"));
         /** output:
          * Fail to execute the method!input:Hello,exception:xxxx
-         * Success to execute the method finally!input:Hello, result:null
-         * return : null
+         * Success to execute the method finally!input:Hello, result:EMPTY
+         * return : EMPTY
          */
 
         //异常情况测试
