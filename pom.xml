@@ -23,6 +23,7 @@
         <module>know-data-study-parent/know-data-study-email</module>
         <module>know-data-study-parent/know-data-study-pay</module>
         <module>know-data-study-parent/know-data-study-rocksdb</module>
+        <module>know-data-study-parent/know-data-study-java-se</module>
         <!--<module>know-data-study-parent/know-data-stud-fault-tree-analysis</module>-->
     </modules>
 
