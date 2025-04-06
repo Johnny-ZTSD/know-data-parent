@@ -134,6 +134,7 @@ public class EmailSenderConfiguration {
     /**
      * 获取QQ邮箱的配置
      * @reference-doc
+     *  [0] https://wx.mail.qq.com/list/readtemplate?name=app_intro.html#/agreement/authorizationCode
      *  [1] SMTP/IMAP服务 - QQ Email - https://wx.mail.qq.com/list/readtemplate?name=app_intro.html#/agreement/authorizationCode
      *  [2] 账号与安全 - QQ Email - https://wx.mail.qq.com/account/index
      * @description
