@@ -5,11 +5,12 @@
  */
 package com.knowdata.framework.core.model.dto;
 
+import com.knowdata.framework.core.model.base.BaseObject;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value = "公共响应对象", description = "公共响应对象") // [swagger] 作用范围: 模型类，如VO、BO
-public class XResponse<T> {
+public class XResponse<T> extends BaseObject {
     private static final long serialVersionUID = 1L;
 
     /**

@@ -35,7 +35,7 @@ import java.time.LocalDateTime;
 @Data
 //@Table(name = "tb_xxxx")
 //@TableName("tb_xxxx")
-public class AbstractEntity implements Serializable {
+public abstract class AbstractEntity extends BaseObject {
 
     //@ApiModelProperty("用户Id")
     //@JsonProperty
