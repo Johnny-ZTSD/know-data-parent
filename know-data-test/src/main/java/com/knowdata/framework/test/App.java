@@ -12,6 +12,6 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println(StringUtils.isEmpty(""));
+        System.out.println(StringUtils.isEmpty("Hello world"));
     }
 }
