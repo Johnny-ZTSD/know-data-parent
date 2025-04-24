@@ -33,6 +33,8 @@
       <module>know-data-study-flink</module>
       <module>know-data-stud-fault-tree-analysis</module>
         <module>know-data-study-nacos</module>
+        <module>know-data-study-spring-ai</module>
+        <module>know-data-study-design-pattern</module>
     </modules>
 
   <properties>
