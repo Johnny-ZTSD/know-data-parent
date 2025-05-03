@@ -1,0 +1,1 @@
+java -jar ../lib/antlr-4.7.2-complete.jar -visitor ../scripts/Calculator.g4
